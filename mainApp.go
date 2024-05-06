@@ -17,5 +17,5 @@ func main() {
 	for ix := 0; ix < len(perm.Result); ix += 1 {
 		fmt.Println(perm.Result[ix])
 	}
-	fmt.Printf("%d桁の順列は%d個あります。", ketasu, len(perm.Result))
+	fmt.Printf("%d桁の順列は%d個あります。", perm.Ketasu, len(perm.Result))
 }

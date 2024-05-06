@@ -5,7 +5,7 @@ Go言語による順列生成プログラム
 2024-5-5 K.Komatsu
 */
 type Permutation struct {
-	ketasu int
+	Ketasu int
 	Result []int
 }
 
@@ -29,15 +29,15 @@ func (p *Permutation) Calc(ketasu int) {
 */
 func (p *Permutation) nextVal(inValue int) int {
 	// 入力値各桁の値を配列に逆順でセットする（例：12345なら5,4,3,2,1）
-	array := make([]int, p.ketasu)
+	array := make([]int, p.Ketasu)
 	v := inValue
-	for ix := 0; ix < p.ketasu; ix += 1 {
+	for ix := 0; ix < p.Ketasu; ix += 1 {
 		array[ix] = v % 10
 		v /= 10
 	}
 	// array[ix-1]>array[ix]となるixを求める（但しix=1〜最終桁）
 	v1 := 0
-	for ix := 1; ix < p.ketasu; ix += 1 {
+	for ix := 1; ix < p.Ketasu; ix += 1 {
 		if array[ix-1] > array[ix] {
 			v1 = ix
 			break
@@ -69,7 +69,7 @@ func (p *Permutation) nextVal(inValue int) int {
 	}
 	// 配列を整数に戻す（例：4,5,3,2,1 → 12354）
 	outValue := 0
-	for ix := p.ketasu; ix > 0; ix -= 1 {
+	for ix := p.Ketasu; ix > 0; ix -= 1 {
 		outValue *= 10
 		outValue += array[ix-1]
 	}
@@ -80,8 +80,14 @@ func (p *Permutation) nextVal(inValue int) int {
 構造体を初期化し、指定した桁数の順列の最小値を返す（例：5桁なら12345）
 */
 func (p *Permutation) init(ketasu int) int {
+	// 桁数は1〜9の範囲に限る。
+	if ketasu < 1 {
+		ketasu = 1
+	} else if ketasu > 9 {
+		ketasu = 9
+	}
 	// 桁数を保存
-	p.ketasu = ketasu
+	p.Ketasu = ketasu
 	// 結果を格納するSliceの領域を確保する。
 	size := 1
 	for ix := 1; ix <= ketasu; ix += 1 {
