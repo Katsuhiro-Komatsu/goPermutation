@@ -5,7 +5,9 @@ Go言語による順列生成プログラム
 2024-5-5 K.Komatsu
 */
 type Permutation struct {
+	// 桁数
 	Ketasu int
+	// 順列を格納するSlice
 	Result []int
 }
 
